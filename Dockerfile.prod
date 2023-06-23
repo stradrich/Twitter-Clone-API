@@ -1,0 +1,9 @@
+# Base Environment
+FROM node:16.0.0-alpine
+
+# Write build steps for Production Environment
+
+# ENV variables
+ENV NODE_ENV production
+
+CMD ["npm", "run", "start"]
