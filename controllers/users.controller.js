@@ -39,7 +39,7 @@ try {
 
 async function updateUser(req, res) {
     try {
-        
+        // TODO: Implement update user
     } catch (error) {
         res.status(500).json({error: error})
     }
@@ -47,7 +47,7 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        
+        // TODO: implement delete user
     } catch (error) {
         res.status(500).json({error: error})
     }

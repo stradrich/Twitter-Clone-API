@@ -2,6 +2,7 @@
 
 const Follow = require("../models/Follow")
 
+// TODO: Rename this to getUserFollowers
 async function getAllFollowers(req, res) {
     try {
         const followers = await Follow.findAll({
@@ -17,6 +18,7 @@ async function getAllFollowers(req, res) {
     }
 }
 
+// TODO: Rename this to getUserFollowings
 async function getAllFollowings(req, res) {
     try {
         const followings = await Follow.findAll({

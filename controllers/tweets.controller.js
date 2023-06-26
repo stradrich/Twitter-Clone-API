@@ -40,6 +40,8 @@ async function createTweet(req, res) {
     }
 }
 
+// TODO: Update tweet
+
 async function deleteTweet(req, res) {
     try {
         // Delete tweet by id

@@ -108,6 +108,8 @@ async function verifyEmail(req, res) {
 
         // Send email to user 
         await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+
+        // TODO: Respond something
     } catch (error) {
         res.status(500).json({error: error})
     }
