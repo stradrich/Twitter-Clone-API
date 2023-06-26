@@ -1,7 +1,7 @@
 // get all replies of the tweet id ✅
 // create a reply to the tweet id ✅
-// update  a reply of the tweet id 
-// delete reply from the tweet id
+// update  a reply of the tweet id ✅
+// delete reply from the tweet id ✅
 
 
 
@@ -12,7 +12,7 @@ async function getReplies(req,res){
     try {
         const replies = await Reply.findAll({
             where: {
-                tweet_id: parseInt(req.params.id)
+                tweetId: parseInt(req.params.tweetId)
             }
         })
         res.json(replies)
@@ -30,7 +30,7 @@ async function createReply (req, res){
 
         const reply = await Reply.create({
             ...req.body,
-        tweetId: parseInt(req.params.id)})
+        tweetId: parseInt(req.params.tweetId)})
 
         res.json(reply);
 
@@ -45,7 +45,7 @@ try {
     const reply = await Reply.update(
         ...req.body,{
             where:{
-                id: parseInt(req.params.replyid)
+                id: parseInt(req.params.id)
             }}
     )
 
@@ -60,7 +60,7 @@ async function deleteReply(req,res){
        const reply = await Reply.destroy({
         where:
         {
-            id: parseInt(req.params.replyid)
+            id: parseInt(req.params.id)
         }
        }) 
     } catch (error) {
@@ -73,5 +73,6 @@ module.exports = {
     getReplies,
     createReply,
     updateReply,
+    deleteReply
 }
     
