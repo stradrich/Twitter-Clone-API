@@ -1,11 +1,11 @@
 const express  = require('express')
 const router = expess.Router()
-const usersConntroller = require('../controllers/users.controller')
+const usersController = require('../controllers/users.controller')
 
-router.get('/users', )
-router.get('/users/:id',)
-router.put('/users/:id',)
-router.delete('/users/:id',)
+router.get('/users', usersController.getAllUsers )
+router.get('/users/:id', usersController.getUserById)
+router.put('/users/:id',usersController.updateUser)
+router.delete('/users/:id',usersController.deleteUser)
 
 
 module.exports = router

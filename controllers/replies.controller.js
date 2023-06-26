@@ -1,3 +1,11 @@
+// get all replies of the tweet id ✅
+// create a reply to the tweet id ✅
+// update  a reply of the tweet id 
+// delete reply from the tweet id
+
+
+
+
 const Reply = require('../models/Replies')
 
 async function getReplies(req,res){
@@ -39,7 +47,9 @@ try {
 }}
 
 
-module.exports = [
+module.exports = {
+    getReplies,
     createReply,
     updateReply,
-]
+}
+    

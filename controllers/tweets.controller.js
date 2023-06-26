@@ -1,5 +1,7 @@
 const Tweet = require("../models/Tweets.js")
 
+
+//TO ADD: limit all feed to just the followed users
 async function getAllTweets(req, res) {
     try {
         // Find all tweets (without pagination)
