@@ -44,13 +44,13 @@ app.use("/users", usersRoutes)
 app.use("/tweets", tweetsRoutes)
 
 // TODO: Rename /replies into /tweets. Because they are part of tweets.
-app.use("/replies", repliesRoutes)
+app.use("/tweets", repliesRoutes)
 
 // TODO: Rename /likes into /tweets. Because they are part of tweets.
-app.use("/likes", likesRoutes)
+app.use("/tweets", likesRoutes)
 
 // TODO: Rename /follow into /users. Because followers and followings are part of users
-app.use("/follow", followRoutes)
+app.use("/users", followRoutes)
 
 app.use("/auth", authRoutes)
 
