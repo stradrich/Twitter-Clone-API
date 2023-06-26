@@ -33,7 +33,7 @@ const Follow = sequelize.define(
       allowNull: true,
       field: "created_at"
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
       field: "updated_at"

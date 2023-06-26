@@ -11,12 +11,12 @@ const Tweets = sequelize.define(
       autoIncrement: true,
       field:'id'
     },
-    tweet_text: {
-      type: DataTypes.STRING(255),
+    tweetText: {
+      type: DataTypes.STRING,
       allowNull: false,
       field:'tweet_text'
     },
-    created_by: {
+    createdBy: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -26,12 +26,12 @@ const Tweets = sequelize.define(
       field: 'created_by'
 
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: true,
      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
       field: 'updated_at'
