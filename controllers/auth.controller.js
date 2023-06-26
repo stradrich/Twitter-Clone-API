@@ -23,10 +23,10 @@ async function register(req, res) {
 
     // Create user using data from request body.
     // Request body must contain all required fields defined in User model.
-    const hashPassword = hashPassword(req.body.password);
+    const hashedPassword = hashPassword(req.body.password);
     const user = await User.create({
         ...req.body,
-        password: hashPassword,
+        password: hashedPassword,
     })
 
     // Create verification token with email
@@ -80,7 +80,7 @@ async function login(req, res) {
         throw "Mandatory field not fulfilled, please provide your email and password"
     }
 
-    // Validate if user exists
+    // Validate if user password
     const matchingPwd = comparePassword(password, user.password);
 
     if(!matchingPwd) throw "Invalid login credentials"

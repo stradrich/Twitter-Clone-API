@@ -1,7 +1,7 @@
-const {DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 
-Replies.define(
+const Replies = sequelize.define(
   "Replies",
   {
     id: {
@@ -10,12 +10,12 @@ Replies.define(
       autoIncrement: true,
       field:'id'
     },
-    tweet_reply: {
-      type: DataTypes.STRING(255),
+    tweetReply: {
+      type: DataTypes.STRING,
       allowNull: false,
       field:'tweet_reply'
     },
-    created_by: {
+    createdBy: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -24,21 +24,21 @@ Replies.define(
       },
      field: 'created_by'
     },
-    tweet_id: {
+    tweetId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'tweets',
         key: 'id'
       },
-      onDelete: 'CASCADE',
+      field: "tweet_id"
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: true,
-    field: 'created_at'
+      field: 'created_at'
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
       field: 'updated_at'
@@ -50,26 +50,4 @@ Replies.define(
   }
 )
 
-Reply.init({
- 
-}, {
-  sequelize,
-  modelName: 'Reply',
-  // Enable timestamps
-  timestamps: true,
-  // Don't automatically add createdAt and updatedAt timestamps
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
-  // Don't use camelcase for automatically added attributes but underscore style
-  // so `updatedAt` will be `updated_at`
-  underscored: true,
-});
-
-// Here are the associations
-User.hasMany(Reply, { foreignKey: 'created_by' });
-Tweet.hasMany(Reply, { foreignKey: 'tweet_id' });
-
-Reply.belongsTo(User, { foreignKey: 'created_by' });
-Reply.belongsTo(Tweet, { foreignKey: 'tweet_id' });
-
-module.exports = Reply;
+module.exports = Replies;
