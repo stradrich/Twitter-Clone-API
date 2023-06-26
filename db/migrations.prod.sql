@@ -11,14 +11,15 @@
  
  4. Run the query.
  */
-CREATE DATABASE twitter_clone_database;
-USE twitter_clone_database;
+CREATE DATABASE twitter_clone_prod;
+USE twitter_clone_prod;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    is_verified BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(id)

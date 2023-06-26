@@ -13,7 +13,7 @@
  */
 
 CREATE DATABASE twitter_clone_database;
-USE twitter_clone_databse;
+USE twitter_clone_database;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
