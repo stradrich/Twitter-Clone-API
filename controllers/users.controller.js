@@ -13,9 +13,13 @@ async function getAllUsers(req, res) {
     }
 }
 
+
 async function getUserById(req, res) {
     try {
-        
+        //find user by id
+        const user = await User.findByPk(parseInt(req.params.id))
+
+        res.json(user)
     } catch (error) {
         res.status(500).json({error: error})
     }
