@@ -33,6 +33,12 @@ app.use(morganConfig);
 const sequelize = require("./config/db.config.js");
 
 // Define routes here
+const usersRoutes = require("./routes/users.routes.js")
+const tweetsRoutes = require("./routes/tweets.routes.js")
+const repliesRoutes = require("./routes/replies.routes.js")
+const likesRoutes = require("./routes/likes.routes.js")
+// const followRoutes = require("./routes/follow.js")
+const authRoutes = require("./routes/auth.routes.js")
 
 // Health
 app.get("/", (req, res) => {
