@@ -19,7 +19,7 @@ async function register(req, res) {
         },
     });
 
-    if (userExist) throw "Sorry, the provided email is already registered. Please choose a different email address.";
+    if (userExist) throw "User already exists";
 
     // Create user using data from request body.
     // Request body must contain all required fields defined in User model.
