@@ -4,8 +4,8 @@
 //    - Implement user login
 
 const jwt = require("jsonwebtoken");
-const User = require("../models/User")
-const { hashPassword, comparePassword, hashPassword } = require("../utils/bcrypt.util.js");
+const User = require("../models/User.js")
+const { hashPassword, comparePassword } = require("../utils/bcrypt.util.js");
 
 async function register(req, res) {
     try {
@@ -25,6 +25,38 @@ async function register(req, res) {
     const user = await User.create({
         ...req.body,
         password: hashPassword,
+    })
+
+    // Create verification token with email
+    const token = jwt.sign(
+        {
+            email: user.email
+        },
+        process.env.SECRET_KEY,
+        {
+            expiresIn: "1h"
+        }
+    )
+
+    // Email data
+    const data = {
+        from: "mailgun@" + process.env.MAILGUN_DOMAIN,
+        to: user.email,
+        subject: "Verify Your Account",
+        html: `
+        Please click on this link to verify your account:
+        <a href="https://${req.header('Host')}/auth/verify?token=${token}">Verify Account</a>
+        <br>
+        <p>This verification link expires in 1 hour</p>
+        `
+    }
+
+    // Send email to user with verify link
+    await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+
+    // Send email sent message
+    res.send({
+        message: "Email verification link sent to user's email"
     })
 
     // Send created user as response.
