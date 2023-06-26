@@ -15,6 +15,22 @@ async function getAllFollowers(req, res) {
     }
 }
 
+async function getAllFollowings(req, res) {
+    try {
+        const followings = await Follow.findAll({
+            where: {
+                followersId: parseInt(req.params.userId)
+            }
+        })
+
+        // Send all followings as response
+        return res.json(followings)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
 module.exports = {
-    getAllFollowers
+    getAllFollowers,
+    getAllFollowings
 }
