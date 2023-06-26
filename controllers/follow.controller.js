@@ -45,8 +45,25 @@ async function createFollow(req, res) {
     }
 }
 
+// Unfollow user
+async function deleteFollow(req, res) {
+    try {
+        const Follow = await Follow.destroy({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+
+        // Send unfollow as response
+        res.json(follow)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
 module.exports = {
     getAllFollowers,
     getAllFollowings,
-    createFollow
+    createFollow,
+    deleteFollow
 }
