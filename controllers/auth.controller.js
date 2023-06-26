@@ -110,6 +110,10 @@ async function verifyEmail(req, res) {
         await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
 
         // TODO: Respond something
+         // Send email sent message
+        res.send({
+            message: "Account verified email sent"
+        })
     } catch (error) {
         res.status(500).json({error: error})
     }
