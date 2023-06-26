@@ -1,53 +1,45 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/db.config');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db.config.js');
 
-class User extends Model {}
-
-User.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
+const User = sequelize.define(
+  "User", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      field: "id"
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "name"
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      field: "email"
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "password"
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: "created_at"
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: "updated_at"
+    },
   },
-  name: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true,
-    }
-  },
-  password: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-    onUpdate: 'CASCADE',
-  },
-}, {
-  sequelize,
-  modelName: 'User',
-  // Enable timestamps
-  timestamps: true,
-  // Don't automatically add createdAt and updatedAt timestamps
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
-  // Don't use camelcase for automatically added attributes but underscore style
-  // so `updatedAt` will be `updated_at`
-  underscored: true,
-});
+  {
+    tableName: "users",
+    timestamps: false
+  }
+)
 
 module.exports = User;
