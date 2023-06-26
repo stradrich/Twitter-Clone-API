@@ -19,7 +19,7 @@ async function getAllFollowings(req, res) {
     try {
         const followings = await Follow.findAll({
             where: {
-                followersId: parseInt(req.params.userId)
+                followerId: parseInt(req.params.userId)
             }
         })
 
@@ -30,7 +30,23 @@ async function getAllFollowings(req, res) {
     }
 }
 
+// Follow user
+async function createFollow(req, res) {
+    try {
+        const follow = await Follow.create({
+            ...req.body,
+            followerId: parseInt(req.params.userId)
+        })
+
+        // Send follow as response
+        res.json(follow)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
 module.exports = {
     getAllFollowers,
-    getAllFollowings
+    getAllFollowings,
+    createFollow
 }
