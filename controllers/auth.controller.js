@@ -6,6 +6,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.js")
 const { hashPassword, comparePassword } = require("../utils/bcrypt.util.js");
+const { mg } = require("../utils/mailgun.util.js")
+const { where } = require("sequelize")
 
 async function register(req, res) {
     try {
@@ -77,6 +79,23 @@ async function login(req, res) {
         // This will go to the catch block
         throw "Mandatory field not fulfilled, please provide your email and password"
     }
+
+    // Validate if user exists
+    const matchingPwd = comparePassword(password, user.password);
+
+    if(!matchingPwd) throw "Invalid login credentials"
+
+    // Generate JWT
+    const token = jwt.sign(
+        { id: user.id, email: user.email},
+        process.env.SECRET_KEY,
+        {
+            expiresIn: "2h",
+            algorithm: "HS256"
+        }
+    );
+
+    res.status(200).json({accessToken: token})
     
     } catch (error) {
         res.status(500).json({error: error})
