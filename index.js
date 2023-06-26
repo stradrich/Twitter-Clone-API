@@ -37,7 +37,7 @@ const usersRoutes = require("./routes/users.routes.js")
 const tweetsRoutes = require("./routes/tweets.routes.js")
 const repliesRoutes = require("./routes/replies.routes.js")
 const likesRoutes = require("./routes/likes.routes.js")
-// const followRoutes = require("./routes/follow.js")
+const followRoutes = require("./routes/follow.routes.js")
 const authRoutes = require("./routes/auth.routes.js")
 
 // Health
