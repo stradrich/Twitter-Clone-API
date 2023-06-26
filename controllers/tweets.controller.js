@@ -42,6 +42,24 @@ async function createTweet(req, res) {
 
 // TODO: Update tweet
 
+async function updateTweet(req, res) {
+    try {
+        const tweet = await Tweet.update(
+            ...req.body,
+            {
+                where: {
+                    id: parseInt(req.params.id)
+                }
+            }
+        )
+
+        // Send updated tweet as response
+        res.json(tweet)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
 async function deleteTweet(req, res) {
     try {
         // Delete tweet by id
@@ -63,5 +81,6 @@ module.exports = {
     getAllTweets,
     getTweetById,
     createTweet,
+    updateTweet,
     deleteTweet
 }
