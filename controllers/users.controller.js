@@ -40,6 +40,21 @@ try {
 async function updateUser(req, res) {
     try {
         // TODO: Implement update user
+        const hashedPassword = hashPassword(req.body.password)
+        const user = await User.update(
+            {
+                ...req.body,
+                password: hashedPassword
+            },
+            {
+                where: {
+                    id: parseInt(req.params.id)
+                }
+            }
+        )  
+
+        // Send updated user as response
+        res.json(user)
     } catch (error) {
         res.status(500).json({error: error})
     }
