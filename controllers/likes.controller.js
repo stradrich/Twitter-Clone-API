@@ -1,5 +1,16 @@
 const Like = require('../models/Likes')
 
+async function getAllLikes(req, res) {
+    const likes = await Like.findAll({
+        where: {
+            id: parseInt(req.params.tweetId)
+        }
+    })
+
+    // Send all likes as response
+    res.json(likes)
+}
+
 async function createLike(req, res){
 
     try {
@@ -47,6 +58,7 @@ async function deleteLike(req,res){
 
 
 module.exports = {
+    getAllLikes,
     createLike,
     updateLike,
     deleteLike
