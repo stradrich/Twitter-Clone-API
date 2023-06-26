@@ -69,6 +69,50 @@ async function register(req, res) {
     }
 }
 
+async function verifyEmail(req, res) {
+    try {
+        // Get verification token from req body
+        const { token } = req.query
+
+        if(!token) throw "Invalid verification token"
+
+        // Verify & decode token & get user id
+        const decoded = jwt.verify(token, process.env.SECRET_KEY)
+
+        // Update user to verified
+        await User.update(
+            {
+                isVerified: true 
+            },
+            {
+                where: {
+                    id: decoded.id
+                }
+            }
+        )
+
+        // Send success message
+        res.send({
+            message: "Account verified"
+        })
+
+        // Prepare email data 
+        const data = {
+            from: "mailgun@" + process.env.MAILGUN_DOMAIN,
+            to: user.email,
+            subject: "Account Verified",
+            html: `
+            <h3>Your account is now verified</h3>
+            `
+        }
+
+        // Send email to user 
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
 async function login(req, res) {
     try {
     // Get user input
