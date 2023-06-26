@@ -25,6 +25,12 @@ const User = sequelize.define(
       allowNull: false,
       field: "password"
     },
+    isVerified:{
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+      field:'is_verified'
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true,
