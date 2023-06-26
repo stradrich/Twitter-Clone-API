@@ -39,7 +39,20 @@ async function createTweet(req, res) {
 }
 
 async function deleteTweet(req, res) {
+    try {
+        // Delete tweet by id
 
+        const tweet = await Tweet.destroy({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+
+        // Send deleted tweet as response
+        res.json(tweet)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 module.exports = {
