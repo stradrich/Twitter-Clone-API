@@ -28,7 +28,9 @@ async function createReply (req, res){
         // create reply using data from request body
         // request body must contain all required fields defined in Replies model
 
-        const reply = await Reply.create(req.body)
+        const reply = await Reply.create({
+            ...req.body,
+        tweetId: parseInt(req.params.id)})
 
         res.json(reply);
 
@@ -40,11 +42,31 @@ async function createReply (req, res){
 async function updateReply (req, res){
     
 try {
+    const reply = await Reply.update(
+        ...req.body,{
+            where:{
+                id: parseInt(req.params.replyid)
+            }}
+    )
 
+    res.json(reply);
     
 } catch (error) {
-    
+      res.status(500).json({error:error})
 }}
+
+async function deleteReply(req,res){
+    try {
+       const reply = await Reply.destroy({
+        where:
+        {
+            id: parseInt(req.params.replyid)
+        }
+       }) 
+    } catch (error) {
+        res.status(500).json({error:error})
+    }
+}
 
 
 module.exports = {
