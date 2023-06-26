@@ -64,3 +64,5 @@ Tweet.hasMany(Reply, { foreignKey: 'tweet_id' });
 
 Reply.belongsTo(User, { foreignKey: 'created_by' });
 Reply.belongsTo(Tweet, { foreignKey: 'tweet_id' });
+
+module.exports = Reply;
