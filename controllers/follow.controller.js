@@ -3,7 +3,7 @@
 const Follow = require("../models/Follow")
 
 // TODO: Rename this to getUserFollowers
-async function getAllFollowers(req, res) {
+async function getUserFollowers(req, res) {
     try {
         const followers = await Follow.findAll({
             where: {
@@ -19,7 +19,7 @@ async function getAllFollowers(req, res) {
 }
 
 // TODO: Rename this to getUserFollowings
-async function getAllFollowings(req, res) {
+async function getUserFollowings(req, res) {
     try {
         const followings = await Follow.findAll({
             where: {
@@ -66,8 +66,8 @@ async function deleteFollow(req, res) {
 }
 
 module.exports = {
-    getAllFollowers,
-    getAllFollowings,
+    getUserFollowers,
+    getUserFollowings,
     createFollow,
     deleteFollow
 }
