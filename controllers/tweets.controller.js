@@ -12,6 +12,29 @@ async function getAllTweets(req, res) {
     }
 }
 
+async function getTweetById(req, res) {
+
+}
+
+async function createTweet(req, res) {
+    try {
+        // Create tweet using data from req body
+        const tweet = await Tweet.create(req.body)
+
+        // Send created tweet as response
+        res.json(tweet)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
+async function deleteTweet(req, res) {
+
+}
+
 module.exports = {
-    getAllTweets
+    getAllTweets,
+    getTweetById,
+    createTweet,
+    deleteTweet
 }
