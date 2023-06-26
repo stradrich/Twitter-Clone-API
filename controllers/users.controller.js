@@ -47,7 +47,14 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        // TODO: implement delete user
+       const user = await User.destroy({
+        where: {
+            id: parseInt(req.params.id)
+        }
+       })
+
+       // Send deleted user as response
+       res.json(user)
     } catch (error) {
         res.status(500).json({error: error})
     }
