@@ -3,7 +3,7 @@ const Like = require('../models/Likes')
 async function getAllLikes(req, res) {
     const likes = await Like.findAll({
         where: {
-            id: parseInt(req.params.tweetId)
+            tweetId: parseInt(req.params.tweetId)
         }
     })
 
@@ -16,7 +16,10 @@ async function createLike(req, res){
     try {
         //create like using data from request body
         //Request body must contain all required fields defined in Likes model.
-        const like = await Like.create(req.body);
+        const like = await Like.create({
+            ...req.body,
+            tweetId: parseInt(req.params.tweetId)
+        });
 
         res.json(like);
     } catch (error) {
