@@ -12,7 +12,7 @@ const Follow = sequelize.define(
     },
     followerId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: User,
         key: 'id'
@@ -30,12 +30,12 @@ const Follow = sequelize.define(
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       field: "created_at"
     },
     updated_at: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       field: "updated_at"
     },
   }
