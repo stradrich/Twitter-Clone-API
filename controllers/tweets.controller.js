@@ -27,7 +27,9 @@ async function getTweetById(req, res) {
 async function createTweet(req, res) {
     try {
         // Create tweet using data from req body
-        const tweet = await Tweet.create(req.body)
+        const tweet = await Tweet.create({
+            ...req.body
+        })
 
         // Send created tweet as response
         res.json(tweet)
