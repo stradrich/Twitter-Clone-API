@@ -14,7 +14,7 @@ const Follow = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: User,
+        model: "users",
         key: 'id'
       },
       field: "follower_id"
@@ -23,7 +23,7 @@ const Follow = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
+        model: "users",
         key: 'id'
       },
       field: "following_id"
