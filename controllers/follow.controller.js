@@ -1,6 +1,6 @@
 //
 
-const Follow = require("../models/Follow.js")
+const Follow = require("../models/Follow")
 
 async function getAllFollowers(req, res) {
     try {

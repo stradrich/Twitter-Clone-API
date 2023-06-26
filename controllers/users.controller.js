@@ -25,6 +25,18 @@ async function getUserById(req, res) {
     }
 }
 
+
+async function createUser(req,res){
+try {
+    const user = await User.create({
+        ...req.body})
+        res.json(user)
+} catch (error) {
+    res.status(500).json({error:error})
+}
+
+}
+
 async function updateUser(req, res) {
     try {
         
@@ -44,6 +56,7 @@ async function deleteUser(req, res) {
 module.exports = {
     getAllUsers,
     getUserById,
+    createUser,
     updateUser,
     deleteUser
 }
