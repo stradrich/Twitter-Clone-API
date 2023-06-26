@@ -12,8 +12,8 @@
  4. Run the query.
  */
 
-CREATE DATABASE twitter_clone_database;
-USE twitter_clone_database;
+CREATE DATABASE twitter_clone_dev;
+USE twitter_clone_dev;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
