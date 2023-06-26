@@ -12,3 +12,34 @@ async function getAllUsers(req, res) {
         res.status(500).json({error: error})
     }
 }
+
+async function getUserById(req, res) {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
+async function updateUser(req, res) {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
+async function deleteUser(req, res) {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
+
+module.exports = {
+    getAllUsers,
+    getUserById,
+    updateUser,
+    deleteUser
+}
