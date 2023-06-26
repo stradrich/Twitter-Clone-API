@@ -63,6 +63,9 @@ async function deleteReply(req,res){
             id: parseInt(req.params.id)
         }
        }) 
+
+    // Send deleted reply as response
+       res.json(reply)
     } catch (error) {
         res.status(500).json({error:error})
     }
