@@ -13,7 +13,15 @@ async function getAllTweets(req, res) {
 }
 
 async function getTweetById(req, res) {
+    try {
+        // Find tweet by id
+        const tweet = await Tweet.findByPk(parseInt(req.params.id))
 
+        // Send tweet as response
+        res.json(tweet)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 async function createTweet(req, res) {
