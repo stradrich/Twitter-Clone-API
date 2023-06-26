@@ -40,6 +40,13 @@ const likesRoutes = require("./routes/likes.routes.js")
 const followRoutes = require("./routes/follow.routes.js")
 const authRoutes = require("./routes/auth.routes.js")
 
+app.use("/users", usersRoutes)
+app.use("/tweets", tweetsRoutes)
+app.use("/replies", repliesRoutes)
+app.use("/likes", likesRoutes)
+app.use("/follow", followRoutes)
+app.use("/auth", authRoutes)
+
 // Health
 app.get("/", (req, res) => {
   res.send("Ok: " + process.env.NODE_ENV);
