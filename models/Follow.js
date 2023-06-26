@@ -1,61 +1,43 @@
-const { Model, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
-const User = require('./user');
 
-class Follow extends Model {}
-
-Follow.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
-  },
-  follower_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id'
-    }
-  },
-  following_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id'
-    }
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-  },
-  updated_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-    onUpdate: 'CASCADE',
-  },
-}, {
-  sequelize,
-  modelName: 'Follow',
-  // Enable timestamps
-  timestamps: true,
-  // Don't automatically add createdAt and updatedAt timestamps
-  createdAt: 'created_at',
-  updatedAt: 'updated_at',
-  // Don't use camelcase for automatically added attributes but underscore style
-  // so `updatedAt` will be `updated_at`
-  underscored: true,
-});
-
-// Here are the associations
-User.hasMany(Follow, { as: 'Followers', foreignKey: 'follower_id' });
-User.hasMany(Follow, { as: 'Following', foreignKey: 'following_id' });
-
-Follow.belongsTo(User, { as: 'Follower', foreignKey: 'follower_id' });
-Follow.belongsTo(User, { as: 'Following', foreignKey: 'following_id' });
-
+const Follow = sequelize.define(
+  "Follow",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      field: "id"
+    },
+    followerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: 'id'
+      },
+      field: "follower_id"
+    },
+    followingId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: 'id'
+      },
+      field: "following_id"
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: "created_at"
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: "updated_at"
+    },
+  }
+)
 module.exports = Follow;
