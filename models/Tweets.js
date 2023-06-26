@@ -43,7 +43,4 @@ const Tweets = sequelize.define(
   }
 )
 
-
-
-
 module.exports = Tweets;
