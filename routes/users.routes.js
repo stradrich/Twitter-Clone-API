@@ -9,7 +9,7 @@ router.get('/:id', usersController.getUserById)
 router.post(
     '/',
     verifyToken,
-    checkRole(['user', 'admin']),
+    checkRole(['admin']),
     usersController.createUser
 )
 
