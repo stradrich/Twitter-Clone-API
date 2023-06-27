@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 # ENV variables
 ENV NODE_ENV development
-ENV DB_NAME task_management_api
+ENV DB_NAME twitter_clone_dev
 ENV DB_HOST host.docker.internal
 ENV DB_PORT 3306
 ENV DB_USER root
