@@ -4,7 +4,7 @@ const usersController = require('../controllers/users.controller')
 const { verifyToken, checkRole } = require("../middlewares/auth.middleware.js")
 
 router.get('/', usersController.getAllUsers)
-router.get('/:id', usersController.getUserById)
+router.get('/:userId', usersController.getUserById)
 
 router.post(
     '/',
