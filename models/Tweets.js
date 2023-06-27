@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.config');
 
-
 const Tweets = sequelize.define(
   "Tweets",
   {
