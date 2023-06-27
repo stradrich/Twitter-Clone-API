@@ -24,8 +24,15 @@ async function getUserById(req, res) {
   }
 }
 
+
+// TO TEST: authorization on creating new user 
 async function createUser(req, res) {
   try {
+
+    if (req.user.role !== "admin"){
+      throw ' Unauthorized'
+    } 
+
     const user = await User.create({
       ...req.body,
     });

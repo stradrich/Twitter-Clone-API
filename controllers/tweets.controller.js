@@ -44,23 +44,21 @@ async function updateTweet(req, res) {
     // TESTING
     const tweet = await Tweet.findByPk(parseInt(req.params.id));
     console.log("Tweet: ", tweet);
+    res.json(tweet)
 
-    if (tweet.createdBy !== req.user.id) {
-        console.log("Cannot update other people's tweet")
-    }
-
-    // if (req.body.id !== req.user.id) {
-
+    // if (tweet.createdBy !== req.user.id) {
+    //     console.log("Cannot update other people's tweet")
+    
     //   throw 'Cannot update other peoples tweet'
     // } else {
-    //     const tweet = await Tweet.update(...req.body, {
+    //     const updatedTweet = await Tweet.update(...req.body, {
     //         where: {
     //           id: parseInt(req.params.id),
     //         },
     //       });
 
     //       // Send updated tweet as response
-    //       res.json(tweet);
+    //       res.json(updatedTweet);
     // }
   } catch (error) {
     res.status(500).json({ error: error });
