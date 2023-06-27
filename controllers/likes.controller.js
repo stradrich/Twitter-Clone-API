@@ -1,14 +1,18 @@
 const Like = require('../models/Likes')
 
 async function getAllLikes(req, res) {
-    const likes = await Like.findAll({
-        where: {
-            tweetId: parseInt(req.params.tweetId)
-        }
-    })
-
-    // Send all likes as response
-    res.json(likes)
+    try {
+        const likes = await Like.findAll({
+            where: {
+                tweetId: parseInt(req.params.tweetId)
+            }
+        })
+        
+        // Send all likes as response
+        res.json(likes)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 async function createLike(req, res){
