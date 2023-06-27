@@ -1,7 +1,5 @@
 const Tweet = require("../models/Tweets.js")
 
-
-//TO ADD: limit all feed to just the followed users
 async function getAllTweets(req, res) {
     try {
         // Find all tweets (without pagination)
@@ -40,8 +38,6 @@ async function createTweet(req, res) {
     }
 }
 
-// TODO: Update tweet
-
 async function updateTweet(req, res) {
     try {
         const tweet = await Tweet.update(
@@ -63,7 +59,6 @@ async function updateTweet(req, res) {
 async function deleteTweet(req, res) {
     try {
         // Delete tweet by id
-
         const tweet = await Tweet.destroy({
             where: {
                 id: parseInt(req.params.id)
