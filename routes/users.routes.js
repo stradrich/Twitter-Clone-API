@@ -1,11 +1,30 @@
 const express  = require('express')
 const router = express.Router()
 const usersController = require('../controllers/users.controller')
+const { verifyToken, checkRole } = require("../middlewares/auth.middleware.js")
 
 router.get('/', usersController.getAllUsers)
 router.get('/:id', usersController.getUserById)
-router.post('/',usersController.createUser)
-router.put('/:id',usersController.updateUser)
-router.delete('/:id',usersController.deleteUser)
+
+router.post(
+    '/',
+    verifyToken,
+    checkRole(['user', 'admin']),
+    usersController.createUser
+)
+
+router.put(
+    '/:userId',
+    verifyToken,
+    checkRole(['user', 'admin']),
+    usersController.updateUser
+)
+
+router.delete(
+    '/:userId',
+    verifyToken,
+    checkRole(['user', 'admin']),
+    usersController.deleteUser
+)
 
 module.exports = router
