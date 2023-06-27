@@ -7,6 +7,7 @@ async function getReplies(req, res) {
         tweetId: parseInt(req.params.tweetId),
       },
     });
+    
     res.json(replies);
   } catch (error) {
     res.status(500).json({ error: error });

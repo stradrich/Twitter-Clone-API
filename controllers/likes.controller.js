@@ -30,6 +30,7 @@ async function createLike(req, res){
         res.status(500).json({error:error})
     }
 }
+
 // async function updateLike(req, res){
 
 //     try {
@@ -63,10 +64,8 @@ async function deleteLike(req,res){
     }
 }
 
-
 module.exports = {
     getAllLikes,
     createLike,
     deleteLike
-
 }
