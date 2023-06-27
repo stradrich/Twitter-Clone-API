@@ -64,8 +64,8 @@ async function register(req, res) {
     // Send created user as response.
     res.json(user);
     } catch (error) {
-    // If there is any error, send error as response.
-    res.status(500).json({error: error});
+        // If there is any error, send error as response.
+        res.status(500).json({error: error});
     }
 }
 
