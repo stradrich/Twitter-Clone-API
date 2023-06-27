@@ -1,8 +1,5 @@
-//
-
 const Follow = require("../models/Follow")
 
-// TODO: Rename this to getUserFollowers
 async function getUserFollowers(req, res) {
     try {
         const followers = await Follow.findAll({
@@ -18,7 +15,6 @@ async function getUserFollowers(req, res) {
     }
 }
 
-// TODO: Rename this to getUserFollowings
 async function getUserFollowings(req, res) {
     try {
         const followings = await Follow.findAll({
@@ -52,7 +48,7 @@ async function createFollow(req, res) {
 // Unfollow user
 async function deleteFollow(req, res) {
     try {
-        const Follow = await Follow.destroy({
+        const follow = await Follow.destroy({
             where: {
                 id: parseInt(req.params.id)
             }
