@@ -3,7 +3,7 @@ const router = express.Router()
 const likesController = require('../controllers/likes.controller')
 const { verifyToken, checkRole } = require('../middlewares/auth.middleware')
 
-router.get('/:id/likes', likesController.getAllLikes)
+router.get('/:tweetId/likes', likesController.getAllLikes)
 
 router.post(
     '/:tweetId/like', 
