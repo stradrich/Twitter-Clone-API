@@ -127,7 +127,7 @@ async function login(req, res) {
     // Validate user input
     if (!email && !password) {
         // This will go to the catch block
-        throw "Mandatory field not fulfilled, please provide your email and password"
+        throw "Email and password are required"
     }
 
     // Validate if user password
