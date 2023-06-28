@@ -51,13 +51,26 @@ async function createLike(req, res){
 
 async function deleteLike(req,res){
     try {
-        const like = await Like.destroy({
-            where:{
-                id: parseInt(req.params.id)
-            }
-        })
 
-        res.json(like)
+        const like = await Like.findByPk(parseInt(req.params.likeId))
+        // const {likedBy} = like
+        console.log(`like:`, like);
+        console.log(`createdBy:`, like.likedBy);
+        
+        
+        if(like.likedBy !== req.user.id){
+            throw "Cannot delete other people's like"
+        }else{
+            console.log(`CHECKPOINT 1`);
+            const delLike = await Like.destroy({
+                where:{
+                    id: parseInt(req.params.likeId)
+                }
+            })
+
+            res.json(delLike)
+        }
+        
 
     } catch (error) {
         res.status(500).json({error:error})
