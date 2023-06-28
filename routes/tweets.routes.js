@@ -9,7 +9,7 @@ router.get('/users/:userId/tweets/:tweetId', tweetController.getTweetById)
 router.post(
     '/',
     verifyToken,
-    checkRole('user', 'admin'),
+    checkRole(['user', 'admin']),
     tweetController.createTweet
 )
 

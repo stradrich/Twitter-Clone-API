@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const { login } = require("../controllers/auth.controller")
 
 function verifyToken(req, res, next) {
     // Get auth header value
@@ -24,6 +25,7 @@ function verifyToken(req, res, next) {
 function checkRole(roles) {
 
     return (req, res, next) => {
+        console.log(req.user);
         if(!roles.includes(req.user.role)) {
             return res.status(401).json({error: "Unauthorized"})
         }
