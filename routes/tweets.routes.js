@@ -4,7 +4,7 @@ const tweetController = require('../controllers/tweets.controller')
 const { verifyToken, checkRole } = require('../middlewares/auth.middleware')
 
 router.get('/feed', tweetController.getAllTweets)
-router.get('/users/:userId/tweets', tweetController.getTweetById)
+router.get('/users/:userId/tweets/:tweetId', tweetController.getTweetById)
 
 router.post(
     '/',
