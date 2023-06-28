@@ -47,13 +47,9 @@ async function updateTweet(req, res) {
     // res.json(tweet)
 
     if (tweet.createdBy !== req.user.id) {
-      console.log(`checkpoint 1`);
-        console.log("Cannot update other people's tweet")
-    
+      console.log("Cannot update other people's tweet")
       throw 'Cannot update other peoples tweet'
     } else {
-      console.log(`checkpoint 2`);
-
         const updatedTweet = await Tweet.update(req.body, {
             where: {
               id: parseInt(req.params.tweetId),
