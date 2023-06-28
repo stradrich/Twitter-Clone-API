@@ -34,24 +34,21 @@ async function updateReply(req, res) {
   try {
     // User can only update their own reply
     // TESTING
-    const tweet = await Reply.findByPk(parseInt(req.params.id))
+    const tweet = await Reply.findByPk(parseInt(req.params.replyId))
     console.log("Update Reply: ", tweet)
 
     if(tweet.createdBy !== req.user.id) {
       console.log("Cannot update other people's reply")
-    }
-
-    // if (req.body.id !== req.user.id) {
-    //   throw "Cannot update other people's reply"
-    // } else {
-    //   const reply = await Reply.update(...req.body, {
-    //     where: {
-    //       id: parseInt(req.params.id),
-    //     },
-    //   });
+      throw 'Cannot update other peoples reply'
+    } else {
+      const updatedReply = await Reply.update(req.body, {
+        where: {
+          id: parseInt(req.params.replyId),
+        },
+      });
   
-    //   res.json(reply);
-    // }
+      res.json(updatedReply);
+    }
 
   } catch (error) {
     res.status(500).json({ error: error });
@@ -63,25 +60,22 @@ async function deleteReply(req, res) {
     // User can only delete their own reply
     // TESTING
 
-    const tweet = await Reply.findByPk(parseInt(req.params.id))
+    const tweet = await Reply.findByPk(parseInt(req.params.replyId))
     console.log("Delete Reply:", tweet)
 
     if(tweet.createdBy !== req.user.id) {
       console.log("Cannot delete other people's reply")
-    }
-
-    // if (req.body.id !== req.user.id) {
-    //   throw "Cannot delete other people's reply"
-    // } else {
-    //   const reply = await Reply.destroy({
-    //     where: {
-    //       id: parseInt(req.params.id),
-    //     },
-    //   });
+      throw "Cannot delete other people's reply"
+    } else {
+      const reply = await Reply.destroy({
+        where: {
+          id: parseInt(req.params.replyId),
+        },
+      });
   
-    //   // Send deleted reply as response
-    //   res.json(reply);
-    // }
+      // Send deleted reply as response
+      res.json(reply);
+    }
 
   } catch (error) {
     res.status(500).json({ error: error });
