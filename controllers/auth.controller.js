@@ -85,7 +85,6 @@ async function verifyEmail(req, res) {
   try {
     // Get verification token from req body
     const { verificationToken } = req.body;
-    console.log(`hehehehe this herhe`);
     console.log(verificationToken)
 
     if (!verificationToken) throw "Invalid verification token";
@@ -93,6 +92,13 @@ async function verifyEmail(req, res) {
     // Verify & decode token & get user id
     const decoded = jwt.verify(verificationToken, process.env.SECRET_KEY);
     console.log(`decoded: `, decoded);
+
+    const user = await User.findOne({
+        where:{
+            email: decoded.email
+        }
+    })
+    
     // Update user to verified
     await User.update(
       {
@@ -104,6 +110,7 @@ async function verifyEmail(req, res) {
         },
       }
     );
+    console.log("checkpoint 3");
 
     // Send success message
     res.send({
@@ -119,14 +126,11 @@ async function verifyEmail(req, res) {
             <h3>Your account is now verified</h3>
             `,
     };
+    console.log("checkpoint 4");
 
     // Send email to user
     await mg.messages.create(process.env.MAILGUN_DOMAIN, data);
-
-    // Send email sent message
-    // res.send({
-    //   message: "Account verified email sent",
-    // });
+    
   } catch (error) {
     res.status(500).json({ error: error });
   }
