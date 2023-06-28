@@ -38,6 +38,10 @@ const Follow = sequelize.define(
       allowNull: true,
       field: "updated_at"
     },
+  },
+  {
+    tableName: "follow",
+    timestamps: false
   }
 )
 module.exports = Follow;
