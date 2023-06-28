@@ -19,7 +19,9 @@ async function register(req, res) {
         },
     });
 
-    if (userExist) throw "User already exists";
+    if (userExist) {
+        throw "User already exists"
+    }
 
     // Create user using data from request body.
     // Request body must contain all required fields defined in User model.
@@ -41,16 +43,23 @@ async function register(req, res) {
     )
 
     // Email data
+    // const data = {
+    //     from: "mailgun@" + process.env.MAILGUN_DOMAIN,
+    //     to: user.email,
+    //     subject: "Verify Your Account",
+    //     html: `
+    //     Please click on this link to verify your account:
+    //     <a href="https://${req.header('Host')}/auth/verify?token=${token}">Verify Account</a>
+    //     <br>
+    //     <p>This verification link expires in 1 hour</p>
+    //     `
+    // }
+
     const data = {
         from: "mailgun@" + process.env.MAILGUN_DOMAIN,
         to: user.email,
         subject: "Verify Your Account",
-        html: `
-        Please click on this link to verify your account:
-        <a href="https://${req.header('Host')}/auth/verify?token=${token}">Verify Account</a>
-        <br>
-        <p>This verification link expires in 1 hour</p>
-        `
+        html: `Your token is ${token}`
     }
 
     // Send email to user with verify link
@@ -63,6 +72,7 @@ async function register(req, res) {
 
     // Send created user as response.
     res.json(user);
+    res.status(200).json({message: "User registered successfully"})
     } catch (error) {
         // If there is any error, send error as response.
         res.status(500).json({error: error});
@@ -72,12 +82,12 @@ async function register(req, res) {
 async function verifyEmail(req, res) {
     try {
         // Get verification token from req body
-        const { token } = req.query
+        const { verificationToken } = req.body
 
-        if(!token) throw "Invalid verification token"
+        if(!verificationToken) throw new Error("Invalid verification token")
 
         // Verify & decode token & get user id
-        const decoded = jwt.verify(token, process.env.SECRET_KEY)
+        const decoded = jwt.verify(verificationToken, process.env.SECRET_KEY)
 
         // Update user to verified
         await User.update(
@@ -109,7 +119,6 @@ async function verifyEmail(req, res) {
         // Send email to user 
         await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
 
-        // TODO: Respond something
          // Send email sent message
         res.send({
             message: "Account verified email sent"

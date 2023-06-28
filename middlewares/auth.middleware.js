@@ -6,7 +6,6 @@ function verifyToken(req, res, next) {
 
     try {
         // Check if token is undefined
-
         if(!token) throw "No token provided"
 
         // Verify & decode token
