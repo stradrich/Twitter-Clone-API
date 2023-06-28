@@ -24,8 +24,9 @@ router.post(
     followController.createFollow
 )
 
+// NOTE: find other userId to replace to followingId incase of error
 router.delete(
-    '/follow/:userId', 
+    '/follow/:followingId', 
     verifyToken,
     checkRole(['user', 'admin']),
     followController.deleteFollow

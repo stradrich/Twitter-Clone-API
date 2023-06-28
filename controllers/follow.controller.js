@@ -35,7 +35,7 @@ async function createFollow(req, res) {
     try {
         const follow = await Follow.create({
             ...req.body,
-            followerId: parseInt(req.params.userId)
+            followerId: parseInt(req.body.userId)
         })
 
         // Send follow as response
@@ -48,9 +48,17 @@ async function createFollow(req, res) {
 // Unfollow user
 async function deleteFollow(req, res) {
     try {
+        const follower = req.user.id
+        const following = req.params.followingId
+
+        console.log(`follower:`,follower);
+        console.log(`following:`,following);
+
+
         const follow = await Follow.destroy({
             where: {
-                id: parseInt(req.params.id)
+                followerId: follower,
+                followingId: following
             }
         })
 
