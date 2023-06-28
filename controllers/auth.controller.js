@@ -98,7 +98,7 @@ async function verifyEmail(req, res) {
             email: decoded.email
         }
     })
-    
+
     // Update user to verified
     await User.update(
       {
@@ -153,7 +153,8 @@ async function login(req, res) {
         }
     })
 
-    if(!user) throw `oi sign up first`
+    if(!user) throw `User does not exist. Please sign up.`
+    
     // Validate if user password
     const matchingPwd = comparePassword(password, user.password);
 
@@ -164,7 +165,7 @@ async function login(req, res) {
       { id: user.id, email: user.email, role:user.role },
       process.env.SECRET_KEY,
       {
-        expiresIn: "2h",
+        // expiresIn: "2h",
         algorithm: "HS256",
       }
     );
