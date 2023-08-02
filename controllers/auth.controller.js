@@ -69,7 +69,7 @@ async function register(req, res) {
     // Send email sent message
     res.json({
       message: "Email verification link sent to user's email",
-      user
+      user,
     });
 
     // Send created user as response.
@@ -85,7 +85,7 @@ async function verifyEmail(req, res) {
   try {
     // Get verification token from req body
     const { verificationToken } = req.body;
-    console.log(verificationToken)
+    console.log(verificationToken);
 
     if (!verificationToken) throw "Invalid verification token";
 
@@ -94,10 +94,10 @@ async function verifyEmail(req, res) {
     console.log(`decoded: `, decoded);
 
     const user = await User.findOne({
-        where:{
-            email: decoded.email
-        }
-    })
+      where: {
+        email: decoded.email,
+      },
+    });
 
     // Update user to verified
     await User.update(
@@ -130,7 +130,6 @@ async function verifyEmail(req, res) {
 
     // Send email to user
     await mg.messages.create(process.env.MAILGUN_DOMAIN, data);
-    
   } catch (error) {
     res.status(500).json({ error: error });
   }
@@ -148,21 +147,23 @@ async function login(req, res) {
     }
 
     const user = await User.findOne({
-        where:{
-            email: email
-        }
-    })
+      where: {
+        email: email,
+      },
+    });
 
-    if(!user) throw `User does not exist. Please sign up.`
-    
+    if (!user) throw `User does not exist. Please sign up.`;
+
     // Validate if user password
     const matchingPwd = comparePassword(password, user.password);
+
+    console.log(`hehehe`);
 
     if (!matchingPwd) throw "Invalid login credentials";
 
     // Generate JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, role:user.role },
+      { id: user.id, email: user.email, role: user.role },
       process.env.SECRET_KEY,
       {
         // expiresIn: "2h",
